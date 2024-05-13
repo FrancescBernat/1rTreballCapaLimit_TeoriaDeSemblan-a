@@ -32,9 +32,9 @@ H[H < -999] = np.nan
 
 fun.Grafiques(data.time, H, "Humitat")
 
-LE = data.LE
-LE[LE < -999] = np.nan
-fun.Grafiques(data.time, LE, "LE")
+Le = data.LE
+Le[Le < -999] = np.nan
+fun.Grafiques(data.time, Le, "LE")
 
 ## %% Humitat relativa
 q1 = fun.f_q(data['T'], data['p'], data['rel_H'])
@@ -46,4 +46,38 @@ plt.plot(data.time, q2, label="0.26 m")
 plt.title("Humitat especifica")
 plt.legend()
 
-#%%%  
+#%% Resultats Teoria semblança
+
+ustar, H_sem, Le_sem = fun.TSemb(1, data["w_speed"], 
+                                 data['T'], data['low_T'],
+                                data["rel_H"], data["low_rel_H"])
+
+plt.figure(dpi=300)
+plt.plot(data.time, Le, label="Valors teorics")
+plt.plot(data.time, Le_sem, label="Teoria de Semblança")
+plt.title("LE")
+plt.legend()
+
+plt.figure(dpi=300)
+plt.plot(data.time, H, label="Valors teorics")
+plt.plot(data.time, H_sem, label="Teoria de Semblança")
+plt.title("Humitat")
+plt.legend()
+
+# %%
+
+ustar, H_sem, Le_sem = fun.TSemb(1, data["w_speed"], 
+                                 data['T'], data['low_T'],
+                                data["rel_H"], data["low_rel_H"])
+
+plt.figure(dpi=300)
+plt.plot(data.time, Le, label="Valors teorics")
+plt.plot(data.time, Le_sem, label="Teoria de Semblança")
+plt.title("LE")
+plt.legend()
+
+plt.figure(dpi=300)
+plt.plot(data.time, H, label="Valors teorics")
+plt.plot(data.time, H_sem, label="Teoria de Semblança")
+plt.title("Humitat")
+plt.legend()

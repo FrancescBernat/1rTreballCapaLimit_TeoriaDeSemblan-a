@@ -38,7 +38,7 @@ def ustar(U, k=0.4, z0=0.02, z2vent=2.15):
 
     return ustar
 
-def TSemb(z, U, k=0.4, z0=0.02, z2vent=2.15, z0t=0.26,
+def TSemb(z, U, t2m, ts, q2m, qs, k=0.4, z0=0.02, z2vent=2.15, z0t=0.26,
           z2t=2, tht0=300):
 
     g = 9.81
@@ -48,13 +48,26 @@ def TSemb(z, U, k=0.4, z0=0.02, z2vent=2.15, z0t=0.26,
     ustar = k*U / ( np.log(z2vent/z0) )
     L = - (tht0 * ustar**3) / (k*g*wT)
 
+    
+    phis = np.vectorize(f_phi)
+
     phi_m, phi_h, phi_q = phis(z, L)
     phi0_m, phi0_h, phi0_q = phis(z0, L)
 
-    ustar_new = k*U / ( np.log(z2vent/z0) + phi_m - phi0_m )   
-    wT = - ( ) / ( np.log( z2t/z0t) )    
+    for i in range(10):
+        ustar_new = k*U / ( np.log(z2vent/z0) + phi_m - phi0_m ) 
 
-def phis(z, L):
+        wT = - ( (t2m - ts)*k*ustar ) / ( np.log( z2t/z0t ) 
+                                        + phi_h - phi0_h  )  
+          
+        wq =  ( (q2m - qs)*k*ustar ) /  ( np.log( z2t/z0t ) 
+                                        + phi_q - phi0_q  )
+        
+        ustar = ustar_new
+
+    return ustar, 1231*wT, 3013.5*wq
+
+def f_phi(z, L):
 
     z_L = z/L
 
@@ -64,7 +77,8 @@ def phis(z, L):
         ylmo = 0.95*(1 - 11.6*z_L)**0.5
 
         phi_m = -np.log( (1 + xlmo**2)/2 ) + \
-                -2*np.log( (1 + xlmo)/2 ) + 2*np.arctan(xlmo)
+                -2*np.log( (1 + xlmo)/2 ) + 2*np.arctan(xlmo)  + \
+                -np.pi/2
         phi_h = -2*np.log( (1 + ylmo)/2 )
         phi_q = phi_h
 
