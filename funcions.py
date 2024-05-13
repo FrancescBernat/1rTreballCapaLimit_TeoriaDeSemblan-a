@@ -38,14 +38,42 @@ def ustar(U, k=0.4, z0=0.02, z2vent=2.15):
 
     return ustar
 
-def TSemb(z_L, U, k=0.4, z0=0.02, z2vent=2.15, tht0=300):
+def TSemb(z, U, k=0.4, z0=0.02, z2vent=2.15, z0t=0.26,
+          z2t=2, tht0=300):
 
+    g = 9.81
+    wT = 0.001
+
+    # Primera iteració
     ustar = k*U / ( np.log(z2vent/z0) )
-
     L = - (tht0 * ustar**3) / (k*g*wT)
+
+    phi_m, phi_h, phi_q = phis(z, L)
+    phi0_m, phi0_h, phi0_q = phis(z0, L)
+
+    ustar_new = k*U / ( np.log(z2vent/z0) + phi_m - phi0_m )   
+    wT = - ( ) / ( np.log( z2t/z0t) )    
+
+def phis(z, L):
+
+    z_L = z/L
 
     if z_L < 0:
 
         xlmo = (1 - 19.3*z_L)**0.25
+        ylmo = 0.95*(1 - 11.6*z_L)**0.5
+
+        phi_m = -np.log( (1 + xlmo**2)/2 ) + \
+                -2*np.log( (1 + xlmo)/2 ) + 2*np.arctan(xlmo)
+        phi_h = -2*np.log( (1 + ylmo)/2 )
+        phi_q = phi_h
+
+    elif z_L > 0:
+
+        phi_m = -6*z_L
+        phi_h = -7.8*z_L
+        phi_q = phi_h
+
+    return phi_m, phi_h, phi_q
 
 

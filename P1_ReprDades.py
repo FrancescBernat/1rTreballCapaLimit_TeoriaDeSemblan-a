@@ -17,7 +17,6 @@ from importlib import reload
 
 reload(fun)
 
-
 arxiu = "Dades/DADES_26SETEMBRE2020.dat"
 
 colnames = ["time", "H", "LE", "ustar", "z_L", "w_speed",
@@ -47,4 +46,4 @@ plt.plot(data.time, q2, label="0.26 m")
 plt.title("Humitat especifica")
 plt.legend()
 
-## 
+#%%%  
