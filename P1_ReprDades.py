@@ -46,11 +46,11 @@ plt.plot(data.time, q2, label="0.26 m")
 plt.title("Humitat especifica")
 plt.legend()
 
-#%% Resultats Teoria semblança
+## %% Resultats Teoria semblança
 
-ustar, H_sem, Le_sem = fun.TSemb(1, data["w_speed"], 
+ustar, H_sem, Le_sem = fun.TSemb(2, data["w_speed"], 
                                  data['T'], data['low_T'],
-                                data["rel_H"], data["low_rel_H"])
+                                q1, q2)
 
 plt.figure(dpi=300)
 plt.plot(data.time, Le, label="Valors teorics")
@@ -64,11 +64,12 @@ plt.plot(data.time, H_sem, label="Teoria de Semblança")
 plt.title("Humitat")
 plt.legend()
 
-# %%
+##  %%
 
 ustar, H_sem, Le_sem = fun.TSemb(1, data["w_speed"], 
                                  data['T'], data['low_T'],
-                                data["rel_H"], data["low_rel_H"])
+                                data["rel_H"], data["low_rel_H"],
+                                tht0=data['T'].mean()+273)
 
 plt.figure(dpi=300)
 plt.plot(data.time, Le, label="Valors teorics")

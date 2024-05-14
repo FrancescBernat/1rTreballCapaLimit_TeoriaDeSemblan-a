@@ -23,7 +23,8 @@ def Grafiques(time: pd.core.series.Series,
 
 def f_q(T, P, HR):
 
-    alfa = 18.0153**(-3) / 28.9644**(-3)
+    # alfa = 18.0153**(-3) / 28.9644**(-3)
+    alfa = 18.0153e-3 / 28.9644e-3
     e_sat = 6.112 * np.exp( 17.67 +  T/(T + 243.5) )
 
     rsat = alfa * e_sat / (P - e_sat)
@@ -54,16 +55,21 @@ def TSemb(z, U, t2m, ts, q2m, qs, k=0.4, z0=0.02, z2vent=2.15, z0t=0.26,
     phi_m, phi_h, phi_q = phis(z, L)
     phi0_m, phi0_h, phi0_q = phis(z0, L)
 
-    for i in range(10):
+    for i in range(20):
+        
         ustar_new = k*U / ( np.log(z2vent/z0) + phi_m - phi0_m ) 
 
-        wT = - ( (t2m - ts)*k*ustar ) / ( np.log( z2t/z0t ) 
-                                        + phi_h - phi0_h  )  
-          
-        wq =  ( (q2m - qs)*k*ustar ) /  ( np.log( z2t/z0t ) 
-                                        + phi_q - phi0_q  )
+        if abs(ustar-ustar_new) < 1e-5:
+            break
         
         ustar = ustar_new
+        L = - (tht0 * ustar**3) / (k*g*wT)
+
+    wT = - ( (t2m - ts)*k*ustar ) / ( np.log( z2t/z0t ) 
+                                        + phi_h - phi0_h  )  
+          
+    wq =  ( (q2m - qs)*k*ustar ) /  ( np.log( z2t/z0t ) 
+                                    + phi_q - phi0_q  )
 
     return ustar, 1231*wT, 3013.5*wq
 
