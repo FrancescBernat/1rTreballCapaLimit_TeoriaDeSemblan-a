@@ -20,6 +20,20 @@ def Grafiques(time: pd.core.series.Series,
     ax.set_xlabel("Temps (H)")
     ax.set_title(titol, fontsize=20)
 
+def GrafiquesComp(data, ustar):
+    
+    fig, ax = plt.subplots(dpi=300)
+
+    ax.scatter(data.time, data["ustar"], label="Valors teorics", 
+                marker=".", color="seagreen")
+    ax.plot(data.time, ustar, label="Teoria de Semblança",
+            color="steelblue")
+    
+    ax.set_title("U estrella")
+    ax.set_ylabel("$u_*$ (m$s^{-1}$)")
+    ax.set_xlabel("Temps (H)")
+    ax.minorticks_on()
+    ax.legend()
 
 def f_q(T, P, HR):
 

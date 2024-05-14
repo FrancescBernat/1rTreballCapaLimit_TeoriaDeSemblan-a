@@ -43,7 +43,10 @@ Le = data.LE
 Le[Le < -999] = np.nan
 fun.Grafiques(data.time, Le, "LE")
 
-#%% Humitat relativa
+################################################################
+####################### Humitat relativa #######################
+################################################################
+
 
 q1 = fun.f_q(data['T'], data['p'], data['rel_H'])
 q2 = fun.f_q(data['low_T'], data['p'], data['low_rel_H'])
@@ -54,7 +57,9 @@ plt.plot(data.time, q2, label="0.26 m")
 plt.title("Humitat especifica")
 plt.legend()
 
-#%% Resultats Teoria semblança
+################################################################
+################### Resultats Teoria semblança #################
+################################################################
 
 ustar, H_sem, Le_sem = fun.TSemb(2, data["w_speed"], 
                                  data['T'], data['low_T'],
@@ -81,7 +86,9 @@ plt.title("Calor sensible (H)")
 plt.xlabel("Temps (H)")
 plt.legend()
 
-#%% Adaptació dels parametres
+################################################################
+############ Adaptació dels parametres de la teoria ############
+################################################################
 
 ustar, H_sem, Le_sem = fun.TSemb(1, data["w_speed"], 
                                  data['T'], data['low_T'],
@@ -114,4 +121,3 @@ plt.plot(data.time, H_sem, label="Teoria de Semblança")
 plt.title("Calor sensible (H)")
 plt.legend()
 plt.xlabel("Temps (H)")
-# %%
