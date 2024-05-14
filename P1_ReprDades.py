@@ -45,9 +45,8 @@ fun.Grafiques(data.time, Le, "LE")
 
 # Representam el vent
 fig, ax = plt.subplots(dpi=400, subplot_kw={'projection': 'polar'})
-graf_vent = ax.scatter(data["w_speed"], data["w_dir"], 
-                       c=data["time"], vmin=0, vmax=24, cmap="winter")
-                    #    cmap=plt.cm.get_cmap('RdYlBu'))
+graf_vent = ax.scatter(data["w_dir"], data["w_speed"], 
+                       c=data["time"], vmin=0, vmax=24, cmap="cividis")
 ax.set_rlabel_position(-22.5)  # Move radial labels away from plotted line
 ax.grid(True)
 
@@ -80,19 +79,25 @@ ustar, H_sem, Le_sem = fun.TSemb(2, data["w_speed"],
                                  data['T'], data['low_T'],
                                 q1, q2)
 
-plt.figure(dpi=300)
-plt.plot(data.time, data["ustar"], label="Valors teorics")
-plt.plot(data.time, ustar, label="Teoria de Semblança")
-plt.title("U estrella")
-plt.xlabel("Temps (H)")
-plt.legend()
+fun.GrafiquesComp(data, data["ustar"], ustar, 
+                  ylabel="$u_*$ (m$s^{-1}$)")
+ax = plt.gca()
+ax.set_title("Ustar")
+# plt.figure(dpi=300)
+# plt.plot(data.time, data["ustar"], label="Valors teorics")
+# plt.plot(data.time, ustar, label="Teoria de Semblança")
+# plt.title("U estrella")
+# plt.xlabel("Temps (H)")
+# plt.legend()
 
-plt.figure(dpi=300)
-plt.plot(data.time, Le, label="Valors teorics")
-plt.plot(data.time, Le_sem, label="Teoria de Semblança")
-plt.title("Calor Latent (LE)")
-plt.xlabel("Temps (H)")
-plt.legend()
+# plt.figure(dpi=300)
+# plt.plot(data.time, Le, label="Valors teorics")
+# plt.plot(data.time, Le_sem, label="Teoria de Semblança")
+# plt.title("Calor Latent (LE)")
+# plt.xlabel("Temps (H)")
+# plt.legend()
+fun.GrafiquesComp(data, Le, Le_sem, ylabel="LE (W $m^{-1}$)",
+                  colorvar="goldenrod", colorsemb="lightsteelblue")
 
 plt.figure(dpi=300)
 plt.plot(data.time, H, label="Valors teorics")
@@ -110,25 +115,33 @@ ustar, H_sem, Le_sem = fun.TSemb(1, data["w_speed"],
                                 q1, q2, z0=0.08,
                                 tht0=data['T'].mean()+273)
 
-plt.figure(dpi=300)
-plt.scatter(data.time, data["ustar"], label="Valors teorics", 
-            marker=".", color="seagreen")
-plt.plot(data.time, ustar, label="Teoria de Semblança",
-          color="steelblue")
-plt.title("U estrella")
-plt.xlabel("Temps (H)")
-plt.ylabel("$u_*$ (m$s^{-1}$)")
-plt.minorticks_on()
-plt.legend()
+# plt.figure(dpi=300)
+# plt.scatter(data.time, data["ustar"], label="Valors teorics", 
+#             marker=".", color="seagreen")
+# plt.plot(data.time, ustar, label="Teoria de Semblança",
+#           color="steelblue")
+# plt.title("U estrella")
+# plt.xlabel("Temps (H)")
+# plt.ylabel("$u_*$ (m$s^{-1}$)")
+# plt.minorticks_on()
+# plt.legend()
 
-plt.figure(dpi=300)
-plt.scatter(data.time, Le, label="Valors teorics", 
-            marker=".")
-plt.plot(data.time, Le_sem, label="Teoria de Semblança")
-plt.title("Calor latent (LE)")
-plt.xlabel("Temps (H)")
-plt.minorticks_on()
-plt.legend()
+fun.GrafiquesComp(data, data["ustar"], ustar, 
+                  ylabel="$u_*$ (m$s^{-1}$)")
+
+
+
+# plt.figure(dpi=300)
+# plt.scatter(data.time, Le, label="Valors teorics", 
+#             marker=".")
+# plt.plot(data.time, Le_sem, label="Teoria de Semblança")
+# plt.title("Calor latent (LE)")
+# plt.xlabel("Temps (H)")
+# plt.minorticks_on()
+# plt.legend()
+
+fun.GrafiquesComp(data, Le, Le_sem, ylabel="LE (W $m^{-1}$)",
+                  colorvar="goldenrod", colorsemb="lightsteelblue")
 
 plt.figure(dpi=300)
 plt.scatter(data.time, H, label="Valors teorics", 

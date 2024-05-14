@@ -21,14 +21,14 @@ def Grafiques(time: pd.core.series.Series,
     ax.set_title(titol, fontsize=20)
 
 def GrafiquesComp(data, yvar, ysemb, ylabel,
-                  colorvar="seagreen", 
+                  colorvar="mediumseagreen", 
                   colorsemb="steelblue"):
 
     fig, ax = plt.subplots(dpi=300)
 
-    ax.scatter(data.time, data[yvar], label="Valors teorics", 
+    ax.scatter(data.time, yvar, label="Valors teorics", 
                 marker=".", color=colorvar)
-    ax.plot(data.time, ysemb, label="Teoria de Semblança",
+    ax.plot(data.time, ysemb, label="Resultats numérics",
             color=colorsemb)
     
     # ax.set_title("U estrella")
