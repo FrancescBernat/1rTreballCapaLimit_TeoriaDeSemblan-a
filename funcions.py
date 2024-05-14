@@ -12,13 +12,15 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 def Grafiques(time: pd.core.series.Series,  
-              var: pd.core.series.Series, titol: str):
+              var: pd.core.series.Series, 
+              ylabel: str, pcolor="olive"):
 
-    fig, ax = plt.subplots(figsize=(10, 8), dpi=600)
+    fig, ax = plt.subplots(dpi=400)
 
-    ax.scatter(time, var)
+    ax.plot(time, var, '.-', color=pcolor)
     ax.set_xlabel("Temps (H)")
-    ax.set_title(titol, fontsize=20)
+    ax.set_ylabel(ylabel)
+    ax.minorticks_on()
 
 def GrafiquesComp(data, yvar, ysemb, ylabel,
                   colorvar="mediumseagreen", 

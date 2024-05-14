@@ -40,11 +40,16 @@ output = ".jpg"
 H = data.H
 H[H < -999] = np.nan
 
-fun.Grafiques(data.time, H, "Humitat")
+fun.Grafiques(data.time, H, "H (W $m^{-1})$", "sienna")
+plt.savefig("Imatges/H_dades"+output)
+plt.title("Calor sensible")
+
 
 Le = data.LE
 Le[Le < -999] = np.nan
-fun.Grafiques(data.time, Le, "LE")
+fun.Grafiques(data.time, Le, "LE (W $m^{-1}$)", "rosybrown")
+plt.savefig("Imatges/LE_dades"+output)
+plt.title("Calor latent")
 
 
 
@@ -61,6 +66,7 @@ plt.minorticks_on()
 plt.show()
 
 plt.savefig("Imatges/Vent" + output)
+plt.title("Modul del vent")
 
 # Grafic polar
 fig, ax = plt.subplots(dpi=400, subplot_kw={'projection': 'polar'})
@@ -87,13 +93,13 @@ q2 = fun.f_q(data['low_T'], data['p'], data['low_rel_H'])
 plt.figure(dpi=400)
 plt.plot(data.time, q1, label="2 m", color="cornflowerblue")
 plt.plot(data.time, q2, label="0.26 m", color="peru")
-plt.title("Humitat especifica")
 plt.xlabel("Temps (H)")
 plt.ylabel("q (g/kg)")
 plt.minorticks_on()
 plt.legend()
 
 plt.savefig("Imatges/Humitat especifica" + output)
+plt.title("Humitat especifica")
 
 ################################################################
 ################### Resultats Teoria semblança #################
