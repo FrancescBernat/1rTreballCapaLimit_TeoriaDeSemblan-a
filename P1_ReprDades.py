@@ -37,20 +37,28 @@ data = pd.read_csv(arxiu, sep="\s+", engine='python',
 
 output = ".jpg"
 
+################################################################
+##################### Grafiques singulars ######################
+################################################################
+
+# Calor sensible
 H = data.H
 H[H < -999] = np.nan
-
 fun.Grafiques(data.time, H, "H (W $m^{-1})$", "sienna")
 plt.savefig("Imatges/H_dades"+output)
 plt.title("Calor sensible")
 
-
+# Calor latent
 Le = data.LE
 Le[Le < -999] = np.nan
 fun.Grafiques(data.time, Le, "LE (W $m^{-1}$)", "rosybrown")
 plt.savefig("Imatges/LE_dades"+output)
 plt.title("Calor latent")
 
+# Pressió atmosferica
+fun.Grafiques(data.time, data['p'], "p (hPa)")
+plt.savefig("Imatges/Pressio"+output)
+plt.title("Pressio")
 
 
 ################################################################
