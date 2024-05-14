@@ -53,32 +53,44 @@ ustar, H_sem, Le_sem = fun.TSemb(2, data["w_speed"],
                                 q1, q2)
 
 plt.figure(dpi=300)
+plt.plot(data.time, data["ustar"], label="Valors teorics")
+plt.plot(data.time, ustar, label="Teoria de Semblança")
+plt.title("U estrella")
+plt.legend()
+
+plt.figure(dpi=300)
 plt.plot(data.time, Le, label="Valors teorics")
 plt.plot(data.time, Le_sem, label="Teoria de Semblança")
-plt.title("LE")
+plt.title("Calor Latent (LE)")
 plt.legend()
 
 plt.figure(dpi=300)
 plt.plot(data.time, H, label="Valors teorics")
 plt.plot(data.time, H_sem, label="Teoria de Semblança")
-plt.title("Humitat")
+plt.title("Calor sensible (H)")
 plt.legend()
 
 ##  %%
 
 ustar, H_sem, Le_sem = fun.TSemb(1, data["w_speed"], 
                                  data['T'], data['low_T'],
-                                data["rel_H"], data["low_rel_H"],
+                                q1, q2,
                                 tht0=data['T'].mean()+273)
+
+plt.figure(dpi=300)
+plt.plot(data.time, data["ustar"], label="Valors teorics")
+plt.plot(data.time, ustar, label="Teoria de Semblança")
+plt.title("U estrella")
+plt.legend()
 
 plt.figure(dpi=300)
 plt.plot(data.time, Le, label="Valors teorics")
 plt.plot(data.time, Le_sem, label="Teoria de Semblança")
-plt.title("LE")
+plt.title("Calor latent (LE)")
 plt.legend()
 
 plt.figure(dpi=300)
 plt.plot(data.time, H, label="Valors teorics")
 plt.plot(data.time, H_sem, label="Teoria de Semblança")
-plt.title("Humitat")
+plt.title("Calor sensible (H)")
 plt.legend()
