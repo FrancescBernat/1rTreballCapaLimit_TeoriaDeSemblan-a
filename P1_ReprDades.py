@@ -11,11 +11,18 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
+# Importam les funcions auxiliars desde una altra arxiu
 import funcions as fun
 
 from importlib import reload
-
 reload(fun)
+
+import matplotlib as mp
+
+# Per a cambiar les lletres a l'estil que és te a latex
+mp.rcParams['mathtext.fontset'] = 'stix'
+mp.rcParams['font.family'] = 'STIXGeneral'
+mp.rcParams.update({'font.size': 12})
 
 arxiu = "Dades/DADES_26SETEMBRE2020.dat"
 
@@ -36,7 +43,8 @@ Le = data.LE
 Le[Le < -999] = np.nan
 fun.Grafiques(data.time, Le, "LE")
 
-## %% Humitat relativa
+#%% Humitat relativa
+
 q1 = fun.f_q(data['T'], data['p'], data['rel_H'])
 q2 = fun.f_q(data['low_T'], data['p'], data['low_rel_H'])
 
@@ -46,7 +54,7 @@ plt.plot(data.time, q2, label="0.26 m")
 plt.title("Humitat especifica")
 plt.legend()
 
-## %% Resultats Teoria semblança
+#%% Resultats Teoria semblança
 
 ustar, H_sem, Le_sem = fun.TSemb(2, data["w_speed"], 
                                  data['T'], data['low_T'],
@@ -70,27 +78,27 @@ plt.plot(data.time, H_sem, label="Teoria de Semblança")
 plt.title("Calor sensible (H)")
 plt.legend()
 
-##  %%
+#%% Adaptació dels parametres
 
 ustar, H_sem, Le_sem = fun.TSemb(1, data["w_speed"], 
                                  data['T'], data['low_T'],
-                                q1, q2,
+                                q1, q2, z0=0.08,
                                 tht0=data['T'].mean()+273)
 
 plt.figure(dpi=300)
-plt.plot(data.time, data["ustar"], label="Valors teorics")
+plt.scatter(data.time, data["ustar"], label="Valors teorics")
 plt.plot(data.time, ustar, label="Teoria de Semblança")
 plt.title("U estrella")
 plt.legend()
 
 plt.figure(dpi=300)
-plt.plot(data.time, Le, label="Valors teorics")
+plt.scatter(data.time, Le, label="Valors teorics")
 plt.plot(data.time, Le_sem, label="Teoria de Semblança")
 plt.title("Calor latent (LE)")
 plt.legend()
 
 plt.figure(dpi=300)
-plt.plot(data.time, H, label="Valors teorics")
+plt.scatter(data.time, H, label="Valors teorics")
 plt.plot(data.time, H_sem, label="Teoria de Semblança")
 plt.title("Calor sensible (H)")
 plt.legend()
