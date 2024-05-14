@@ -99,12 +99,15 @@ ax.set_title("Ustar")
 fun.GrafiquesComp(data, Le, Le_sem, ylabel="LE (W $m^{-1}$)",
                   colorvar="goldenrod", colorsemb="lightsteelblue")
 
-plt.figure(dpi=300)
-plt.plot(data.time, H, label="Valors teorics")
-plt.plot(data.time, H_sem, label="Teoria de Semblança")
-plt.title("Calor sensible (H)")
-plt.xlabel("Temps (H)")
-plt.legend()
+# plt.figure(dpi=300)
+# plt.plot(data.time, H, label="Valors teorics")
+# plt.plot(data.time, H_sem, label="Teoria de Semblança")
+# plt.title("Calor sensible (H)")
+# plt.xlabel("Temps (H)")
+# plt.legend()
+
+fun.GrafiquesComp(data, H, H_sem, ylabel="H (W $m^{-1}$)",
+                  colorvar="maroon", colorsemb="mediumaquamarine")
 
 ################################################################
 ############ Adaptació dels parametres de la teoria ############
@@ -143,10 +146,13 @@ fun.GrafiquesComp(data, data["ustar"], ustar,
 fun.GrafiquesComp(data, Le, Le_sem, ylabel="LE (W $m^{-1}$)",
                   colorvar="goldenrod", colorsemb="lightsteelblue")
 
-plt.figure(dpi=300)
-plt.scatter(data.time, H, label="Valors teorics", 
-            marker=".")
-plt.plot(data.time, H_sem, label="Teoria de Semblança")
-plt.title("Calor sensible (H)")
-plt.legend()
-plt.xlabel("Temps (H)")
+# plt.figure(dpi=300)
+# plt.scatter(data.time, H, label="Valors teorics", 
+#             marker=".")
+# plt.plot(data.time, H_sem, label="Teoria de Semblança")
+# plt.title("Calor sensible (H)")
+# plt.legend()
+# plt.xlabel("Temps (H)")
+
+fun.GrafiquesComp(data, H, H_sem, ylabel="H (W $m^{-1}$)",
+                  colorvar="maroon", colorsemb="mediumaquamarine")
