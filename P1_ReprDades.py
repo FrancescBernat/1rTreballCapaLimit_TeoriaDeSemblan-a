@@ -60,6 +60,42 @@ fun.Grafiques(data.time, data['p'], "p (hPa)")
 plt.savefig("Imatges/Pressio"+output)
 plt.title("Pressio")
 
+################################################################
+##################### Grafiques multiples ######################
+################################################################
+
+# Temperatura
+fig, ax = plt.subplots(dpi=300)
+
+ax.plot(data['time'], data['T'], ".-", label="2 m")
+ax.plot(data['time'], data["low_T"], ".-", label="0.26 m")
+
+ax.set_xlabel("Temps (H)")
+ax.set_ylabel("T (ºC)")
+ax.minorticks_on()
+
+ax.legend()
+plt.show()
+fig.savefig("Imatges/Temp"+output)
+
+# Humitat relativa
+fig, ax = plt.subplots(dpi=300)
+
+ax.plot(data['time'], data['rel_H'], ".-", label="2 m", 
+        color="navy")
+ax.plot(data['time'], data["low_rel_H"], ".-", label="0.26 m",
+        color="teal")
+
+ax.set_xlabel("Temps (H)")
+ax.set_ylabel("Humitat relativa (%)")
+ax.minorticks_on()
+
+ax.legend()
+plt.show()
+fig.savefig("Imatges/Humitat_rel"+output)
+
+
+
 
 ################################################################
 ##################### Representam el vent ######################
