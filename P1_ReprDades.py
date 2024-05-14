@@ -57,8 +57,12 @@ plt.figure(dpi=400)
 plt.plot(data["time"], data["w_speed"], color="dimgray")
 plt.ylabel("v (m/s)")
 plt.xlabel("temps (H)")
+plt.minorticks_on()
+plt.show()
+
 plt.savefig("Imatges/Vent" + output)
 
+# Grafic polar
 fig, ax = plt.subplots(dpi=400, subplot_kw={'projection': 'polar'})
 graf_vent = ax.scatter(data["w_dir"], data["w_speed"], 
                        c=data["time"], vmin=0, vmax=24, cmap="cividis")
@@ -69,7 +73,6 @@ ax.set_xlabel("v (m/s)")
 cb = fig.colorbar(graf_vent)
 cb.set_label("Hores")
 
-plt.tight_layout()
 plt.show()
 plt.savefig("Imatges/RosaVent" + output)
 
@@ -87,6 +90,7 @@ plt.plot(data.time, q2, label="0.26 m", color="peru")
 plt.title("Humitat especifica")
 plt.xlabel("Temps (H)")
 plt.ylabel("q (g/kg)")
+plt.minorticks_on()
 plt.legend()
 
 plt.savefig("Imatges/Humitat especifica" + output)
