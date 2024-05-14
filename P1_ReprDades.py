@@ -43,6 +43,21 @@ Le = data.LE
 Le[Le < -999] = np.nan
 fun.Grafiques(data.time, Le, "LE")
 
+# Representam el vent
+fig, ax = plt.subplots(dpi=400, subplot_kw={'projection': 'polar'})
+graf_vent = ax.scatter(data["w_speed"], data["w_dir"], 
+                       c=data["time"], vmin=0, vmax=24, cmap="winter")
+                    #    cmap=plt.cm.get_cmap('RdYlBu'))
+ax.set_rlabel_position(-22.5)  # Move radial labels away from plotted line
+ax.grid(True)
+
+cb = fig.colorbar(graf_vent)
+cb.set_label("Hores")
+
+plt.tight_layout()
+plt.show()
+
+
 ################################################################
 ####################### Humitat relativa #######################
 ################################################################
@@ -102,6 +117,7 @@ plt.plot(data.time, ustar, label="Teoria de Semblança",
           color="steelblue")
 plt.title("U estrella")
 plt.xlabel("Temps (H)")
+plt.ylabel("$u_*$ (m$s^{-1}$)")
 plt.minorticks_on()
 plt.legend()
 
