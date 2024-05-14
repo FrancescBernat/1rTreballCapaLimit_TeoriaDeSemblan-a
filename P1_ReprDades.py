@@ -64,18 +64,21 @@ plt.figure(dpi=300)
 plt.plot(data.time, data["ustar"], label="Valors teorics")
 plt.plot(data.time, ustar, label="Teoria de Semblança")
 plt.title("U estrella")
+plt.xlabel("Temps (H)")
 plt.legend()
 
 plt.figure(dpi=300)
 plt.plot(data.time, Le, label="Valors teorics")
 plt.plot(data.time, Le_sem, label="Teoria de Semblança")
 plt.title("Calor Latent (LE)")
+plt.xlabel("Temps (H)")
 plt.legend()
 
 plt.figure(dpi=300)
 plt.plot(data.time, H, label="Valors teorics")
 plt.plot(data.time, H_sem, label="Teoria de Semblança")
 plt.title("Calor sensible (H)")
+plt.xlabel("Temps (H)")
 plt.legend()
 
 #%% Adaptació dels parametres
@@ -86,19 +89,29 @@ ustar, H_sem, Le_sem = fun.TSemb(1, data["w_speed"],
                                 tht0=data['T'].mean()+273)
 
 plt.figure(dpi=300)
-plt.scatter(data.time, data["ustar"], label="Valors teorics")
-plt.plot(data.time, ustar, label="Teoria de Semblança")
+plt.scatter(data.time, data["ustar"], label="Valors teorics", 
+            marker=".", color="seagreen")
+plt.plot(data.time, ustar, label="Teoria de Semblança",
+          color="steelblue")
 plt.title("U estrella")
+plt.xlabel("Temps (H)")
+plt.minorticks_on()
 plt.legend()
 
 plt.figure(dpi=300)
-plt.scatter(data.time, Le, label="Valors teorics")
+plt.scatter(data.time, Le, label="Valors teorics", 
+            marker=".")
 plt.plot(data.time, Le_sem, label="Teoria de Semblança")
 plt.title("Calor latent (LE)")
+plt.xlabel("Temps (H)")
+plt.minorticks_on()
 plt.legend()
 
 plt.figure(dpi=300)
-plt.scatter(data.time, H, label="Valors teorics")
+plt.scatter(data.time, H, label="Valors teorics", 
+            marker=".")
 plt.plot(data.time, H_sem, label="Teoria de Semblança")
 plt.title("Calor sensible (H)")
 plt.legend()
+plt.xlabel("Temps (H)")
+# %%

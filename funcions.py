@@ -33,14 +33,8 @@ def f_q(T, P, HR):
 
     return q
 
-def ustar(U, k=0.4, z0=0.02, z2vent=2.15):
-
-    ustar = k*U / ( np.log(z2vent/z0) )
-
-    return ustar
-
-def TSemb(z, U, t2m, ts, q2m, qs, k=0.4, z0=0.02, z2vent=2.15, z0t=0.26,
-          z2t=2, tht0=300):
+def TSemb(z, U, t2m, ts, q2m, qs, k=0.4, z0=0.02, 
+          z2vent=2.15, z0t=0.26, z2t=2, tht0=300):
 
     g = 9.81
     wT = 0.001
@@ -74,7 +68,7 @@ def TSemb(z, U, t2m, ts, q2m, qs, k=0.4, z0=0.02, z2vent=2.15, z0t=0.26,
 
     return ustar, 1231*wT, 3013.5*wq
 
-def f_phi(z, L):
+def f_phi(z: int, L: pd.core.series.Series):
 
     z_L = z/L
 
@@ -96,5 +90,3 @@ def f_phi(z, L):
         phi_q = phi_h
 
     return phi_m, phi_h, phi_q
-
-
