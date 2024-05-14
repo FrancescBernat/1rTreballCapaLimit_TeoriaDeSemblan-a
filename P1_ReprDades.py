@@ -60,6 +60,16 @@ fun.Grafiques(data.time, data['p'], "p (hPa)")
 plt.savefig("Imatges/Pressio"+output)
 plt.title("Pressio")
 
+# U estrella 
+fun.Grafiques(data.time, data['ustar'], "$u_*$ (m $s^{-1}$)",
+              "tan")
+plt.savefig("Imatges/Ustar_obs"+output)
+plt.title("Velocitat fricció observat")
+
+# U estrella 
+fun.Grafiques(data.time, data['z_L'], "z/L", "indigo")
+plt.savefig("Imatges/z_L"+output)
+
 ################################################################
 ##################### Grafiques multiples ######################
 ################################################################
@@ -93,9 +103,6 @@ ax.minorticks_on()
 ax.legend()
 plt.show()
 fig.savefig("Imatges/Humitat_rel"+output)
-
-
-
 
 ################################################################
 ##################### Representam el vent ######################
