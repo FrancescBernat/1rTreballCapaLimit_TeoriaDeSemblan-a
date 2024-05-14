@@ -34,6 +34,9 @@ colnames = ["time", "H", "LE", "ustar", "z_L", "w_speed",
 data = pd.read_csv(arxiu, sep="\s+", engine='python', 
                    names=colnames, header=None)
 
+
+output = ".jpg"
+
 H = data.H
 H[H < -999] = np.nan
 
@@ -43,19 +46,32 @@ Le = data.LE
 Le[Le < -999] = np.nan
 fun.Grafiques(data.time, Le, "LE")
 
-# Representam el vent
+
+
+################################################################
+##################### Representam el vent ######################
+################################################################
+
+plt.figure(dpi=400)
+
+plt.plot(data["time"], data["w_speed"], color="dimgray")
+plt.ylabel("v (m/s)")
+plt.xlabel("temps (H)")
+plt.savefig("Imatges/Vent" + output)
+
 fig, ax = plt.subplots(dpi=400, subplot_kw={'projection': 'polar'})
 graf_vent = ax.scatter(data["w_dir"], data["w_speed"], 
                        c=data["time"], vmin=0, vmax=24, cmap="cividis")
 ax.set_rlabel_position(-22.5)  # Move radial labels away from plotted line
 ax.grid(True)
 
+ax.set_xlabel("v (m/s)")
 cb = fig.colorbar(graf_vent)
 cb.set_label("Hores")
 
 plt.tight_layout()
 plt.show()
-
+plt.savefig("Imatges/RosaVent" + output)
 
 ################################################################
 ####################### Humitat relativa #######################
@@ -73,6 +89,8 @@ plt.xlabel("Temps (H)")
 plt.ylabel("q (g/kg)")
 plt.legend()
 
+plt.savefig("Imatges/Humitat especifica" + output)
+
 ################################################################
 ################### Resultats Teoria semblança #################
 ################################################################
@@ -83,15 +101,16 @@ ustar, H_sem, Le_sem = fun.TSemb(2, data["w_speed"],
 
 fun.GrafiquesComp(data, data["ustar"], ustar, 
                   ylabel="$u_*$ (m$s^{-1}$)")
-ax = plt.gca()
-ax.set_title("Ustar")
+plt.savefig("Imatges/ustar" + output)
 
 fun.GrafiquesComp(data, Le, Le_sem, ylabel="LE (W $m^{-1}$)",
                   colorvar="goldenrod", colorsemb="lightsteelblue")
+plt.savefig("Imatges/Le" + output)
 
 
 fun.GrafiquesComp(data, H, H_sem, ylabel="H (W $m^{-1}$)",
                   colorvar="maroon", colorsemb="mediumaquamarine")
+plt.savefig("Imatges/H" + output)
 
 ################################################################
 ############ Adaptació dels parametres de la teoria ############
@@ -106,11 +125,12 @@ ustar, H_sem, Le_sem = fun.TSemb(1, data["w_speed"],
 
 fun.GrafiquesComp(data, data["ustar"], ustar, 
                   ylabel="$u_*$ (m$s^{-1}$)")
-
+plt.savefig("Imatges/ustar_2" + output)
 
 fun.GrafiquesComp(data, Le, Le_sem, ylabel="LE (W $m^{-1}$)",
                   colorvar="goldenrod", colorsemb="lightsteelblue")
-
+plt.savefig("Imatges/Le_2" + output)
 
 fun.GrafiquesComp(data, H, H_sem, ylabel="H (W $m^{-1}$)",
                   colorvar="maroon", colorsemb="mediumaquamarine")
+plt.savefig("Imatges/H_2" + output)
