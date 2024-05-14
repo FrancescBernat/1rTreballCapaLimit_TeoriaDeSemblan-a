@@ -20,17 +20,19 @@ def Grafiques(time: pd.core.series.Series,
     ax.set_xlabel("Temps (H)")
     ax.set_title(titol, fontsize=20)
 
-def GrafiquesComp(data, ustar):
-    
+def GrafiquesComp(data, yvar, ysemb, ylabel,
+                  colorvar="seagreen", 
+                  colorsemb="steelblue"):
+
     fig, ax = plt.subplots(dpi=300)
 
-    ax.scatter(data.time, data["ustar"], label="Valors teorics", 
-                marker=".", color="seagreen")
-    ax.plot(data.time, ustar, label="Teoria de Semblança",
-            color="steelblue")
+    ax.scatter(data.time, data[yvar], label="Valors teorics", 
+                marker=".", color=colorvar)
+    ax.plot(data.time, ysemb, label="Teoria de Semblança",
+            color=colorsemb)
     
-    ax.set_title("U estrella")
-    ax.set_ylabel("$u_*$ (m$s^{-1}$)")
+    # ax.set_title("U estrella")
+    ax.set_ylabel(ylabel)
     ax.set_xlabel("Temps (H)")
     ax.minorticks_on()
     ax.legend()
