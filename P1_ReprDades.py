@@ -57,16 +57,15 @@ plt.title("Calor latent")
 ##################### Representam el vent ######################
 ################################################################
 
-plt.figure(dpi=400)
+fig = plt.figure(dpi=400)
 
-plt.plot(data["time"], data["w_speed"], color="dimgray")
+ax = plt.plot(data["time"], data["w_speed"], color="dimgray")
 plt.ylabel("v (m/s)")
 plt.xlabel("temps (H)")
 plt.minorticks_on()
 plt.show()
 
-plt.savefig("Imatges/Vent" + output)
-plt.title("Modul del vent")
+fig.savefig("Imatges/Vent" + output)
 
 # Grafic polar
 fig, ax = plt.subplots(dpi=400, subplot_kw={'projection': 'polar'})
@@ -79,8 +78,9 @@ ax.set_xlabel("v (m/s)")
 cb = fig.colorbar(graf_vent)
 cb.set_label("Hores")
 
+plt.tight_layout()
 plt.show()
-plt.savefig("Imatges/RosaVent" + output)
+fig.savefig("Imatges/RosaVent" + output)
 
 ################################################################
 ####################### Humitat relativa #######################
