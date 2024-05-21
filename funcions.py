@@ -15,9 +15,11 @@ def Grafiques(time: pd.core.series.Series,
               var: pd.core.series.Series, 
               ylabel: str, pcolor="olive"):
 
-    fig, ax = plt.subplots(dpi=400)
+    fig, ax = plt.subplots(figsize=(13,9), dpi=400)
 
-    ax.plot(time, var, '.-', color=pcolor)
+    ax.scatter(time, var, color=pcolor)
+    # ax.plot(time, var, "--", color=pcolor, alpha=0.4)
+
     ax.set_xlabel("Temps (H)")
     ax.set_ylabel(ylabel)
     ax.minorticks_on()
