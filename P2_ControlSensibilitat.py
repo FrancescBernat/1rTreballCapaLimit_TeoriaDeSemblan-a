@@ -66,6 +66,8 @@ err_H  = np.zeros( (50, 50) )
 err_Le = np.zeros((50, 50))
 err_u  = np.zeros((50, 50))
 
+##### RMSE variant z0 i k
+
 for i, zi in enumerate(z0): # files
     for j, kj in enumerate(k): # columnes
         ustar, H_sem, Le_sem = fun.TSemb(2, data["w_speed"], 
@@ -75,12 +77,6 @@ for i, zi in enumerate(z0): # files
         err_H[i, j] = fun.fRMSE(ustar, ustar_rea)
         err_Le[i, j] = fun.fRMSE(Le_sem, Le)
         err_H[i, j] = fun.fRMSE(H_sem, H)
-
-# fig, ax = plt.subplots(dpi=300)
-# m = ax.contourf(z0, k, err_H)
-# fig.colorbar(m, title="colorbaer")
-# ax.set_ylabel("k")
-# ax.set_xlabel("z_0")
 
 fun.GraficsErrors(z0, k, err_H)
 plt.savefig("Imatges/RMSE_H_zk"+output)
@@ -93,3 +89,51 @@ plt.title("Le, variant z0 i k")
 fun.GraficsErrors(z0, k, err_u)
 plt.savefig("Imatges/RMSE_U_zk"+output)
 plt.title("U estrella, variant z0 i k")
+
+##### RMSE variant z0 i tht0
+
+for i, zi in enumerate(z0): # files
+    for j, tj in enumerate(tht0): # columnes
+        ustar, H_sem, Le_sem = fun.TSemb(2, data["w_speed"], 
+                                data['T'], data['low_T'],
+                                q1, q2, z0=zi, tht0=tj)
+        
+        err_H[i, j] = fun.fRMSE(ustar, ustar_rea)
+        err_Le[i, j] = fun.fRMSE(Le_sem, Le)
+        err_H[i, j] = fun.fRMSE(H_sem, H)
+
+fun.GraficsErrors(z0, k, err_H, color="twilight", ylab=r"\theta_0")
+plt.savefig("Imatges/RMSE_H_zt"+output)
+plt.title("H, variant z0 i t")
+
+fun.GraficsErrors(z0, k, err_Le, color="twilight", ylab=r"\theta_0")
+plt.savefig("Imatges/RMSE_Le_zt"+output)
+plt.title("Le, variant z0 i t")
+
+fun.GraficsErrors(z0, k, err_u, color="twilight", ylab=r"\theta_0")
+plt.savefig("Imatges/RMSE_U_zt"+output)
+plt.title("U estrella, variant z0 i t")
+
+##### RMSE variant k i tht0
+
+for i, ti in enumerate(tht0): # files
+    for j, kj in enumerate(k): # columnes
+        ustar, H_sem, Le_sem = fun.TSemb(2, data["w_speed"], 
+                                data['T'], data['low_T'],
+                                q1, q2, k=kj, tht0=ti)
+        
+        err_H[i, j] = fun.fRMSE(ustar, ustar_rea)
+        err_Le[i, j] = fun.fRMSE(Le_sem, Le)
+        err_H[i, j] = fun.fRMSE(H_sem, H)
+
+fun.GraficsErrors(z0, k, err_H, color="CMRmap", xlab=r"\theta_0")
+plt.savefig("Imatges/RMSE_H_tk"+output)
+plt.title("H, variant t0 i k")
+
+fun.GraficsErrors(z0, k, err_Le, color="CMRmap", xlab=r"\theta_0")
+plt.savefig("Imatges/RMSE_Le_tk"+output)
+plt.title("Le, variant t0 i k")
+
+fun.GraficsErrors(z0, k, err_u, color="CMRmap", xlab=r"\theta_0")
+plt.savefig("Imatges/RMSE_U_tk"+output)
+plt.title("U estrella, variant t0 i k")
