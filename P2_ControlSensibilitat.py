@@ -40,3 +40,36 @@ data = pd.read_csv(arxiu, sep="\s+", engine='python',
 q1 = fun.f_q(data['T'], data['p'], data['rel_H'])
 q2 = fun.f_q(data['low_T'], data['p'], data['low_rel_H'])
 
+H = data.H
+H[H < -999] = np.nan
+
+Le = data.LE
+Le[Le < -100] = np.nan
+
+ustar_rea = data['ustar']
+
+##############################################################
+# Calculs
+##############################################################
+
+ustar, H_sem, Le_sem = fun.TSemb(2, data["w_speed"], 
+                                 data['T'], data['low_T'],
+                                q1, q2)
+
+z0 = np.linspace(0.02, 0.08)
+k = np.linspace(0.25, 0.4)
+tht0 = np.linspace(290, 310)
+
+err_H  = np.zeros( (50, 50) )
+err_Le = np.zeros((50, 50))
+err_u  = np.zeros((50, 50))
+
+for i, zi in enumerate(z0):
+    for j, kj in enumerate(k):
+        ustar, H_sem, Le_sem = fun.TSemb(2, data["w_speed"], 
+                                data['T'], data['low_T'],
+                                q1, q2, k=kj, z0=zi)
+        
+        err_H[i, j] = fun.fRMSE(ustar, ustar_rea)
+        err_Le[i, j] = fun.fRMSE(Le_sem, Le)
+        err_H[i, j] = fun.fRMSE(H_sem, H)

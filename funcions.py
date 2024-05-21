@@ -111,3 +111,9 @@ def f_phi(z: int, L: pd.core.series.Series):
         phi_q = phi_h
 
     return phi_m, phi_h, phi_q
+
+def fRMSE(teor, real):
+
+    res = np.sqrt( np.sum( (teor-real)**2 ) / len(teor) )
+
+    return res
