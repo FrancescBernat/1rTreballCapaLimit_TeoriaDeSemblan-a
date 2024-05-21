@@ -141,19 +141,17 @@ plt.title("Humitat especifica")
 ################################################################
 
 fig = plt.figure(figsize=(13,9), dpi=400)
-
 ax = plt.scatter(data["time"], data["w_speed"], color="dimgray")
 plt.ylabel("v (m/s)")
 plt.xlabel("temps (H)")
 plt.minorticks_on()
 plt.show()
-
 fig.savefig("Imatges/Vent" + output)
 
 # Rosa dels vents
 mp.rcParams.update({'font.size': 18})
 
-plt.figure(figsize=(14, 14), dpi=400)
+fig = plt.figure(figsize=(14, 14), dpi=400)
 ax = WindroseAxes.from_ax()
 ax.bar(data["w_dir"], data["w_speed"], normed=False, 
        opening=0.8, edgecolor='darkblue', 
