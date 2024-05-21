@@ -74,7 +74,7 @@ for i, zi in enumerate(z0): # files
                                 data['T'], data['low_T'],
                                 q1, q2, k=kj, z0=zi)
         
-        err_H[i, j] = fun.fRMSE(ustar, ustar_rea)
+        err_u[i, j] = fun.fRMSE(ustar, ustar_rea)
         err_Le[i, j] = fun.fRMSE(Le_sem, Le)
         err_H[i, j] = fun.fRMSE(H_sem, H)
 
@@ -98,7 +98,7 @@ for i, zi in enumerate(z0): # files
                                 data['T'], data['low_T'],
                                 q1, q2, z0=zi, tht0=tj)
         
-        err_H[i, j] = fun.fRMSE(ustar, ustar_rea)
+        err_u[i, j] = fun.fRMSE(ustar, ustar_rea)
         err_Le[i, j] = fun.fRMSE(Le_sem, Le)
         err_H[i, j] = fun.fRMSE(H_sem, H)
 
@@ -122,7 +122,7 @@ for i, ti in enumerate(tht0): # files
                                 data['T'], data['low_T'],
                                 q1, q2, k=kj, tht0=ti)
         
-        err_H[i, j] = fun.fRMSE(ustar, ustar_rea)
+        err_u[i, j] = fun.fRMSE(ustar, ustar_rea)
         err_Le[i, j] = fun.fRMSE(Le_sem, Le)
         err_H[i, j] = fun.fRMSE(H_sem, H)
 
