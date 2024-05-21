@@ -118,7 +118,7 @@ def fRMSE(teor, real):
 
     return res
 
-def GraficsErrors(x, y, err, xlab="$z_0$", ylab="k", 
+def GraficsErrors(x, y, err, xlab="$z_0$ (m)", ylab="k", 
                   color="ocean"):
 
     fig, ax = plt.subplots(dpi=300)
