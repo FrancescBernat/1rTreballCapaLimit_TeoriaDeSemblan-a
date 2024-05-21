@@ -151,12 +151,15 @@ fig.savefig("Imatges/Vent" + output)
 # Rosa dels vents
 mp.rcParams.update({'font.size': 18})
 
-fig = plt.figure(figsize=(14, 14), dpi=400)
-ax = WindroseAxes.from_ax()
-ax.bar(data["w_dir"], data["w_speed"], normed=False, 
+fig = plt.figure(figsize=(8, 8), dpi=400)
+ax = fig.add_subplot(1, 1, 1, projection="windrose")
+ax.bar(data["w_dir"], data["w_speed"], normed=True, 
        opening=0.8, edgecolor='darkblue', 
        cmap=plt.cm.YlGnBu)
 plt.legend(title="|v| (m/s)")
+
+plt.tight_layout()
+plt.show()
 fig.savefig("Imatges/RosaVent" + output)
 
 # Canviam altra pic la lletra
