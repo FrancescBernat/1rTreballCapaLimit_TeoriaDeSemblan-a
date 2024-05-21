@@ -117,3 +117,14 @@ def fRMSE(teor, real):
     res = np.sqrt( np.sum( (teor-real)**2 ) / len(teor) )
 
     return res
+
+def GraficsErrors(x, y, err, ylab="z_0", xlab="k", 
+                  color="ocean"):
+
+    fig, ax = plt.subplots(dpi=300)
+    m = ax.contourf(x, y, err, cmap=color)
+    cb = fig.colorbar(m)
+    cb.set_label("RMSE")
+    ax.set_ylabel(f"${xlab}$")
+    ax.set_xlabel(f"${ylab}$")
+

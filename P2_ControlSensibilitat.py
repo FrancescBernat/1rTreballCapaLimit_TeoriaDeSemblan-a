@@ -24,6 +24,8 @@ mp.rcParams['mathtext.fontset'] = 'stix'
 mp.rcParams['font.family'] = 'STIXGeneral'
 mp.rcParams.update({'font.size': 15})
 
+output = ".jpg"
+
 ##############################################################
 ##################### Dades necessaries ######################
 ##############################################################
@@ -64,8 +66,8 @@ err_H  = np.zeros( (50, 50) )
 err_Le = np.zeros((50, 50))
 err_u  = np.zeros((50, 50))
 
-for i, zi in enumerate(z0):
-    for j, kj in enumerate(k):
+for i, zi in enumerate(z0): # files
+    for j, kj in enumerate(k): # columnes
         ustar, H_sem, Le_sem = fun.TSemb(2, data["w_speed"], 
                                 data['T'], data['low_T'],
                                 q1, q2, k=kj, z0=zi)
@@ -73,3 +75,21 @@ for i, zi in enumerate(z0):
         err_H[i, j] = fun.fRMSE(ustar, ustar_rea)
         err_Le[i, j] = fun.fRMSE(Le_sem, Le)
         err_H[i, j] = fun.fRMSE(H_sem, H)
+
+# fig, ax = plt.subplots(dpi=300)
+# m = ax.contourf(z0, k, err_H)
+# fig.colorbar(m, title="colorbaer")
+# ax.set_ylabel("k")
+# ax.set_xlabel("z_0")
+
+fun.GraficsErrors(z0, k, err_H)
+plt.savefig("Imatges/RMSE_H_zk"+output)
+plt.title("H, variant z0 i k")
+
+fun.GraficsErrors(z0, k, err_Le)
+plt.savefig("Imatges/RMSE_Le_zk"+output)
+plt.title("Le, variant z0 i k")
+
+fun.GraficsErrors(z0, k, err_u)
+plt.savefig("Imatges/RMSE_U_zk"+output)
+plt.title("U estrella, variant z0 i k")
