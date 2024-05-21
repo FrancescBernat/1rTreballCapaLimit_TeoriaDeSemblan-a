@@ -11,6 +11,9 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
+# Per provar de fer la rosa dels vents
+from windrose import WindroseAxes
+
 # Importam les funcions auxiliars desde una altra arxiu
 import funcions as fun
 
@@ -147,8 +150,19 @@ plt.show()
 
 fig.savefig("Imatges/Vent" + output)
 
+# Rosa dels vents
+mp.rcParams.update({'font.size': 18})
+
+plt.figure(figsize=(14, 14), dpi=400)
+ax = WindroseAxes.from_ax()
+ax.bar(data["w_dir"], data["w_speed"], normed=False, 
+       opening=0.8, edgecolor='darkblue', 
+       cmap=plt.cm.YlGnBu)
+plt.legend(title="|v| (m/s)")
+fig.savefig("Imatges/RosaVent" + output)
+
 # Canviam altra pic la lletra
-mp.rcParams.update({'font.size': 12})
+mp.rcParams.update({'font.size': 15})
 
 # Grafic polar
 fig, ax = plt.subplots(dpi=400, subplot_kw={'projection': 'polar'})
@@ -163,8 +177,7 @@ cb.set_label("Hores")
 
 plt.tight_layout()
 plt.show()
-fig.savefig("Imatges/RosaVent" + output)
-
+fig.savefig("Imatges/ReprIniVent" + output)
 
 
 ################################################################
