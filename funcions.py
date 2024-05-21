@@ -23,6 +23,7 @@ def Grafiques(time: pd.core.series.Series,
     ax.set_xlabel("Temps (H)")
     ax.set_ylabel(ylabel)
     ax.minorticks_on()
+    ax.grid()
 
 def GrafiquesComp(data, yvar, ysemb, ylabel,
                   colorvar="mediumseagreen", 
